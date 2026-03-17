@@ -22,262 +22,249 @@ TOPICS = ["ofw", "health", "money", "sideincome"]
 
 # ── Gemini prompt ──────────────────────────────────────────────────────────────
 POLL_PROMPT = """You are a Facebook community manager for a page targeting Filipinos 
-in Singapore and the Philippines. Your audience includes OFWs, employees, and people 
+in Singapore and the Philippines. Your audience includes OFWs, overseas workers, and people 
 exploring side income and better health habits.
 
 Create ONE engaging Facebook poll-style post about: {topic_description}
 
-Rules:
-- Start with a relatable hook question or statement (no emojis on first line)
-- Provide exactly 4 options labeled A) B) C) D)
-- Each option should be relatable, honest, and non-judgmental
-- Add 1-2 sentences after the options to warm up the audience and invite comments
-- End with a soft CTA asking people to drop their letter in comments
-- Use 2-3 emojis naturally — NOT on the first line
-- Keep it under 150 words total
-- Sound warm, human, and conversational — like a trusted friend asking
-- Occasionally use 1 Tagalog/Taglish word for warmth (optional, only if natural)
-- Do NOT mention any company, product, or brand
+STYLE — very important:
+- Ultra short. Max 60 words total including options.
+- Casual, fun, zero fluff — like texting a close friend
+- First line: 1 punchy question or statement. No emoji on first line.
+- 4 options: A) B) C) D) — each MAX 5 words, honest and relatable
+- Last line: very short CTA e.g. "Drop your letter! 👇" or "Comment below! 💬"
+- 1-2 emojis max, only after the first line
+- Optional: 1 Tagalog word if natural (e.g. "Ikaw?" "Ano?" "Tara!")
+- NO long sentences. NO motivational speeches. NO brand mentions.
 
 Topic: {topic_description}
 
-Respond ONLY with the post caption. No preamble, no quotes around it."""
+Respond ONLY with the post. No preamble, no quotes."""
 
 # ── Hand-written fallback poll library ────────────────────────────────────────
 FALLBACK_POLLS = {
     "ofw": [
-        """Most OFWs send money home every month — but how much do YOU keep for yourself? 💸
+        """How much of your salary do you actually keep? 💸
 
-A) Less than 10% of my salary
-B) 10–20% of my salary
+A) Less than 10%
+B) 10–20%
 C) More than 20%
-D) Still figuring this out 😅
+D) Still figuring it out 😅
 
-Be honest — no judgment here! This is something we don't talk about enough.
-Drop your letter below 👇""",
+Drop your letter! 👇""",
 
-        """How long have you been working abroad? 🌏
+        """How long na you've been working abroad?
 
 A) Less than 2 years
 B) 2–5 years
 C) 5–10 years
-D) More than 10 years
+D) 10+ years 🏆
 
-Whether you're new or a veteran OFW — you're brave for doing what you do. 💪
-Comment your letter and tell us where you're based! 👇""",
+Comment your letter + where you're based! 👇""",
 
-        """What's the hardest part of being an OFW? 😔
+        """Hardest part of being an OFW? 😔
 
-A) Missing family milestones back home
-B) Feeling lonely even in a crowd
-C) Financial pressure to support everyone
-D) Uncertainty about the future
+A) Missing family milestones
+B) Loneliness
+C) Financial pressure
+D) Uncertain future
 
-You're not alone in this. Drop your letter below 👇 Let's support each other. ❤️""",
+Drop your letter 👇""",
 
-        """When you imagine going back home for good — what's your biggest worry? 🏠
+        """Biggest worry about going home for good? 🏠
 
-A) Not having enough savings yet
-B) No stable income waiting back home
-C) Starting over from scratch
-D) I'm actually ready to go home now!
+A) Not enough savings
+B) No income waiting
+C) Starting over
+D) Ready na actually! 😄
 
-This is the real conversation we need to have. 💬 Drop your letter below 👇""",
+Ikaw? Comment below 👇""",
 
-        """Honest question for OFWs: What does your emergency fund look like right now? 💰
-
-A) Less than 1 month of expenses
-B) 1–3 months of expenses
-C) 3–6 months of expenses
-D) What emergency fund? 😅
-
-No shame — most of us were never taught this. Comment your letter below! 👇""",
-
-        """If you could go back in time to when you first became an OFW — what would you tell yourself? 🕐
-
-A) Save more, spend less
-B) Invest earlier
-C) Don't forget to take care of yourself too
-D) Build a business back home sooner
-
-Drop your letter below 👇 Your answer might help someone just starting out! 💪""",
-    ],
-
-    "health": [
-        """Be honest — how many glasses of water do you drink daily? 💧
-
-A) Less than 4 glasses
-B) 4–6 glasses
-C) 7–8 glasses
-D) I lost count (which probably means a lot! 😄)
-
-Most of us are more dehydrated than we think. Drop your letter below 👇""",
-
-        """What time do you usually go to sleep on weekdays? 😴
-
-A) Before 10 PM
-B) 10 PM – 12 AM
-C) 12 AM – 2 AM
-D) What is sleep? 😅
-
-Sleep is the most underrated health habit. Comment your letter below! 👇""",
-
-        """Which meal do you most often skip? 🍽️
-
-A) Breakfast
-B) Lunch
-C) Dinner
-D) I never skip meals 💪
-
-For us Filipinos who grew up with "kumain ka na?" — skipping meals hits different! 😄
-Drop your letter below 👇""",
-
-        """How would you honestly describe your diet right now? 🥗
-
-A) Mostly healthy, I'm disciplined
-B) 50/50 — healthy some days, not others
-C) I eat whatever is available
-D) Sending help 😅
-
-No judgment — life gets busy! Drop your letter below 👇 Let's be real with each other.""",
-
-        """What's your biggest barrier to exercising regularly? 🏃
-
-A) No time after work
-B) Too tired at the end of the day
-C) No gym access or equipment
-D) Honestly, motivation is the problem 😅
-
-You're not alone! Drop your letter below 👇""",
-
-        """How often do you get a full medical check-up? 🏥
-
-A) Every year without fail
-B) Every 2–3 years
-C) Only when I feel sick
-D) It's been way too long 😬
-
-Prevention is always better than cure. Comment your letter below! 👇""",
-    ],
-
-    "money": [
-        """Where does most of your salary go every month? 💸
-
-A) Rent and daily expenses
-B) Sending money home to family
-C) Savings and investments
-D) It disappears before I can track it 😅
-
-This is more common than you think. Drop your letter below 👇 No judgment here!""",
-
-        """Do you currently have a household budget? 📊
-
-A) Yes — I track every dollar/peso
-B) I have a rough idea but don't write it down
-C) I used to but stopped
-D) Budgeting? Never tried it 😅
-
-The first step to financial freedom is knowing where your money goes. 💡
-Drop your letter below 👇""",
-
-        """What's your current relationship with money? 💰
-
-A) We get along well — I save consistently
-B) It's complicated — I try but struggle
-C) Money comes and goes too fast
-D) We need serious couples therapy 😅
-
-Wherever you are — there's always a next step forward. Drop your letter! 👇""",
-
-        """How much of your income do you currently save every month? 🏦
-
-A) Nothing yet — expenses are too high
-B) Less than 10%
-C) 10–20%
-D) More than 20% 💪
-
-The golden rule is 20% — but any amount is better than zero! 
-Comment your letter below 👇""",
-
-        """If you lost your job tomorrow — how long could you survive financially? 😬
+        """Emergency fund check 👀
 
 A) Less than 1 month
 B) 1–3 months
 C) 3–6 months
-D) More than 6 months — I'm prepared 💪
+D) What fund? 😅
 
-This question hits different. Drop your letter honestly below 👇
-Let's talk about building that safety net together. 💬""",
+No shame — drop your letter! 👇""",
 
-        """What's your biggest money mistake you wish you could undo? 💭
+        """If you could tell your first-day-OFW self one thing?
 
-A) Not saving earlier in life
-B) Lending money that was never returned 😅
-C) Spending on things I didn't need
-D) Not investing when I had the chance
+A) Save more, spend less
+B) Invest earlier
+C) Take care of yourself too
+D) Build a business sooner
 
-We've all been there! Drop your letter below 👇 Your story might help someone else.""",
+Drop your letter 👇""",
+    ],
+
+    "health": [
+        """Be honest — glasses of water today? 💧
+
+A) Less than 4
+B) 4–6
+C) 7–8
+D) Lost count 😄
+
+Drop your letter! 👇""",
+
+        """What time did you sleep last night? 😴
+
+A) Before 10 PM
+B) 10 PM–12 AM
+C) 12–2 AM
+D) Sleep? What's that 😅
+
+Comment your letter 👇""",
+
+        """Which meal do you skip the most?
+
+A) Breakfast
+B) Lunch
+C) Dinner
+D) Never skip! 💪
+
+Kumain ka na? Drop your letter 👇""",
+
+        """Honest diet check 🥗
+
+A) Mostly healthy
+B) 50/50 lol
+C) Eat whatever's available
+D) Send help 😅
+
+No judgment! Drop your letter 👇""",
+
+        """Why don't you exercise regularly? 🏃
+
+A) No time
+B) Too tired after work
+C) No gym access
+D) Motivation issue 😅
+
+Comment your letter! 👇""",
+
+        """Last time you had a full check-up? 🏥
+
+A) This year
+B) 2–3 years ago
+C) Only when sick
+D) Too long ago 😬
+
+Drop your letter 👇""",
+    ],
+
+    "money": [
+        """Where does most of your salary go? 💸
+
+A) Rent + daily expenses
+B) Sending money home
+C) Savings + investments
+D) Disappears somehow 😅
+
+Drop your letter 👇""",
+
+        """Do you have a budget? 📊
+
+A) Yes, I track everything
+B) Rough idea lang
+C) Used to, then stopped
+D) Never tried 😅
+
+Comment your letter! 👇""",
+
+        """Your relationship with money? 💰
+
+A) Solid — I save consistently
+B) Complicated 😅
+C) Comes and goes too fast
+D) Need serious help lol
+
+Drop your letter 👇""",
+
+        """How much do you save monthly? 🏦
+
+A) Nothing yet
+B) Less than 10%
+C) 10–20%
+D) 20%+ 💪
+
+Any amount counts! Drop your letter 👇""",
+
+        """If you lost your job tomorrow — how long could you survive? 😬
+
+A) Less than 1 month
+B) 1–3 months
+C) 3–6 months
+D) 6+ months, I'm ready 💪
+
+Real talk. Drop your letter 👇""",
+
+        """Biggest money mistake? 💭
+
+A) Not saving earlier
+B) Lent money, never returned 😅
+C) Bought things I didn't need
+D) Didn't invest when I could
+
+We've all been there! Drop your letter 👇""",
     ],
 
     "sideincome": [
-        """Do you currently have any source of income outside your main job? 💼
+        """Do you have income outside your main job? 💼
 
-A) Yes — I already have a side income
-B) I'm actively building one right now
-C) I want to but don't know where to start
-D) Just my salary for now
+A) Yes!
+B) Building one now
+C) Want to but don't know how
+D) Just salary for now
 
-Wherever you are in this journey — you're already thinking ahead! 💪
-Drop your letter below 👇""",
+Drop your letter 👇""",
 
         """What stops you from starting a side income? 🤔
 
-A) No time after work
-B) Don't know which business to start
-C) Scared of losing money
-D) I actually already have one! 🙌
+A) No time
+B) Don't know what to start
+C) Scared to lose money
+D) Already have one! 🙌
 
-The biggest risk is depending on just one source. Comment your letter below 👇""",
+Comment your letter 👇""",
 
-        """If you had an extra $500 to invest right now — what would you do with it? 💡
+        """Extra $500 right now — what do you do? 💡
 
-A) Put it in a savings account
-B) Invest in stocks or funds
-C) Start a small online business
-D) Honestly, it would go to expenses 😅
+A) Save it
+B) Invest in stocks
+C) Start a small business
+D) Expenses talaga 😅
 
-Every peso/dollar invested today is working for your future self. 
-Drop your letter below 👇""",
+Drop your letter! 👇""",
 
-        """What kind of side income interests you most? 🌱
+        """What side income are you most interested in? 🌱
 
-A) Online selling or e-commerce
-B) Freelancing or online services
-C) Network marketing or direct sales
-D) Content creation or social media
+A) Online selling
+B) Freelancing
+C) Network marketing
+D) Content creation
 
-There's no wrong answer — it's about finding what fits YOUR life. 
-Comment your letter below 👇 💬""",
+No wrong answer! Comment your letter 👇""",
 
-        """How many income streams do you currently have? 📈
+        """How many income streams do you have? 📈
 
-A) Just my salary — one stream
-B) Salary + 1 side income
-C) Multiple streams already 💪
-D) Working on my second stream now
+A) Just 1 (salary)
+B) Salary + 1 side
+C) Multiple already 💪
+D) Working on #2 now
 
-Financial experts say you need at least 3. Where are you on this journey?
-Drop your number below 👇""",
+Drop your number 👇""",
 
-        """What would you do if you had a stable second income of $500/month? 🎯
+        """If you had a stable $500/month extra income? 🎯
 
-A) Finally start saving consistently
-B) Send more money home to family
-C) Invest it for the future
-D) Pay off my debts first
+A) Finally save properly
+B) Send more home
+C) Invest it
+D) Pay off debt first
 
-Dreams become plans when we get specific. 💡
-Comment below and tell us your letter! 👇""",
+Comment your letter! 👇""",
     ],
 }
 
