@@ -1,4 +1,4 @@
-name: Poll Post (Mon, Wed, Fri)
+name: Poll Post (Mon, Wed, Fri, Sun)
 
 on:
   schedule:
