@@ -21,26 +21,29 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 TOPICS = ["ofw", "health", "money", "sideincome"]
 
 # ── Gemini prompt ──────────────────────────────────────────────────────────────
-POLL_PROMPT = """You are a Facebook community manager for a page targeting Filipino professionals 
-— nurses, IT professionals, engineers, architects, pharmacists, statisticians, 
-and other degree-holding career-driven individuals in Singapore and the Philippines.
+POLL_PROMPT = """You are writing a Facebook poll post for Filipino professionals — nurses, 
+IT workers, engineers, architects, pharmacists — in Singapore and the Philippines.
 
-Create ONE engaging Facebook poll-style post about: {topic_description}
+Write a short poll post that sounds like a real person wrote it, not AI.
 
-STYLE — very important:
+LANGUAGE RULES — very important:
+- Simple everyday English. Max 10 words per sentence.
+- Write like you're asking a friend a genuine question
+- Contractions always: "you're", "it's", "don't", "can't"
+- NEVER use: leverage, optimise, empower, unlock, actionable, transformative, synergy
+- Very optional: 1 Filipino word if it fits perfectly (e.g. "Ikaw?" "Tayo na.")
+- NO motivational speeches. NO brand names.
+
+FORMAT — strict:
 - Ultra short. Max 60 words total including options.
-- Peer-to-peer tone — like a smart colleague asking a genuine question
-- Speak to ambition, career growth, and financial intelligence — not hardship
-- First line: sharp professional observation or question. No emoji on first line.
-- 4 options: A) B) C) D) — each MAX 5 words, relatable to professionals
-- Last line: very short CTA e.g. "Drop your letter! 👇" or "Comment below! 💬"
-- 1-2 emojis max, only after the first line
-- Optional: 1 Filipino word if natural (e.g. "Tayo na." "Kaya mo ito.")
-- NO OFW hardship framing. NO remittance mentions. NO domestic worker references.
+- Line 1: One direct question or honest observation. No emoji on this line.
+- Options A) B) C) D) — max 5 words each, relatable to professionals
+- Last line: Short CTA — "Drop your letter! 👇" or "Comment below! 💬"
+- Max 2 emojis total, only after line 1
 
 Topic: {topic_description}
 
-Respond ONLY with the post. No preamble, no quotes."""
+Write ONLY the post. No preamble, no quotes."""
 
 # ── Hand-written fallback poll library ────────────────────────────────────────
 FALLBACK_POLLS = {
