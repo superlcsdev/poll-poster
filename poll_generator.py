@@ -21,21 +21,22 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 TOPICS = ["ofw", "health", "money", "sideincome"]
 
 # ── Gemini prompt ──────────────────────────────────────────────────────────────
-POLL_PROMPT = """You are a Facebook community manager for a page targeting Filipinos 
-in Singapore and the Philippines. Your audience includes OFWs, overseas workers, and people 
-exploring side income and better health habits.
+POLL_PROMPT = """You are a Facebook community manager for a page targeting Filipino professionals 
+— nurses, IT professionals, engineers, architects, pharmacists, statisticians, 
+and other degree-holding career-driven individuals in Singapore and the Philippines.
 
 Create ONE engaging Facebook poll-style post about: {topic_description}
 
 STYLE — very important:
 - Ultra short. Max 60 words total including options.
-- Casual, fun, zero fluff — like texting a close friend
-- First line: 1 punchy question or statement. No emoji on first line.
-- 4 options: A) B) C) D) — each MAX 5 words, honest and relatable
+- Peer-to-peer tone — like a smart colleague asking a genuine question
+- Speak to ambition, career growth, and financial intelligence — not hardship
+- First line: sharp professional observation or question. No emoji on first line.
+- 4 options: A) B) C) D) — each MAX 5 words, relatable to professionals
 - Last line: very short CTA e.g. "Drop your letter! 👇" or "Comment below! 💬"
 - 1-2 emojis max, only after the first line
-- Optional: 1 Tagalog word if natural (e.g. "Ikaw?" "Ano?" "Tara!")
-- NO long sentences. NO motivational speeches. NO brand mentions.
+- Optional: 1 Filipino word if natural (e.g. "Tayo na." "Kaya mo ito.")
+- NO OFW hardship framing. NO remittance mentions. NO domestic worker references.
 
 Topic: {topic_description}
 
@@ -44,227 +45,227 @@ Respond ONLY with the post. No preamble, no quotes."""
 # ── Hand-written fallback poll library ────────────────────────────────────────
 FALLBACK_POLLS = {
     "ofw": [
-        """How much of your salary do you actually keep? 💸
+        """After years in your career abroad, what's your biggest financial realisation?
 
-A) Less than 10%
-B) 10–20%
-C) More than 20%
-D) Still figuring it out 😅
+A) Salary alone won't build wealth
+B) Should have invested earlier
+C) Need a second income stream
+D) Still figuring it out 💡
 
 Drop your letter! 👇""",
 
-        """How long na you've been working abroad?
+        """How long have you been in your professional career abroad? 🌏
 
 A) Less than 2 years
 B) 2–5 years
 C) 5–10 years
-D) 10+ years 🏆
+D) 10+ years — veteran!
 
-Comment your letter + where you're based! 👇""",
+Comment your letter + your profession 👇""",
 
-        """Hardest part of being an OFW? 😔
+        """What's your main financial goal right now as a professional?
 
-A) Missing family milestones
-B) Loneliness
-C) Financial pressure
-D) Uncertain future
-
-Drop your letter 👇""",
-
-        """Biggest worry about going home for good? 🏠
-
-A) Not enough savings
-B) No income waiting
-C) Starting over
-D) Ready na actually! 😄
-
-Ikaw? Comment below 👇""",
-
-        """Emergency fund check 👀
-
-A) Less than 1 month
-B) 1–3 months
-C) 3–6 months
-D) What fund? 😅
-
-No shame — drop your letter! 👇""",
-
-        """If you could tell your first-day-OFW self one thing?
-
-A) Save more, spend less
-B) Invest earlier
-C) Take care of yourself too
-D) Build a business sooner
-
-Drop your letter 👇""",
-    ],
-
-    "health": [
-        """Be honest — glasses of water today? 💧
-
-A) Less than 4
-B) 4–6
-C) 7–8
-D) Lost count 😄
+A) Build an investment portfolio
+B) Start a side income
+C) Pay off debt first
+D) Save 6 months emergency fund 💰
 
 Drop your letter! 👇""",
 
-        """What time did you sleep last night? 😴
+        """What would make you feel truly financially secure? 🎯
 
-A) Before 10 PM
-B) 10 PM–12 AM
-C) 12–2 AM
-D) Sleep? What's that 😅
+A) 3+ income streams
+B) Enough savings to quit anytime
+C) Passive income covering my bills
+D) I'm already there!
 
 Comment your letter 👇""",
 
-        """Which meal do you skip the most?
-
-A) Breakfast
-B) Lunch
-C) Dinner
-D) Never skip! 💪
-
-Kumain ka na? Drop your letter 👇""",
-
-        """Honest diet check 🥗
-
-A) Mostly healthy
-B) 50/50 lol
-C) Eat whatever's available
-D) Send help 😅
-
-No judgment! Drop your letter 👇""",
-
-        """Why don't you exercise regularly? 🏃
-
-A) No time
-B) Too tired after work
-C) No gym access
-D) Motivation issue 😅
-
-Comment your letter! 👇""",
-
-        """Last time you had a full check-up? 🏥
-
-A) This year
-B) 2–3 years ago
-C) Only when sick
-D) Too long ago 😬
-
-Drop your letter 👇""",
-    ],
-
-    "money": [
-        """Where does most of your salary go? 💸
-
-A) Rent + daily expenses
-B) Sending money home
-C) Savings + investments
-D) Disappears somehow 😅
-
-Drop your letter 👇""",
-
-        """Do you have a budget? 📊
-
-A) Yes, I track everything
-B) Rough idea lang
-C) Used to, then stopped
-D) Never tried 😅
-
-Comment your letter! 👇""",
-
-        """Your relationship with money? 💰
-
-A) Solid — I save consistently
-B) Complicated 😅
-C) Comes and goes too fast
-D) Need serious help lol
-
-Drop your letter 👇""",
-
-        """How much do you save monthly? 🏦
+        """How much of your salary do you actively invest? 📈
 
 A) Nothing yet
 B) Less than 10%
 C) 10–20%
-D) 20%+ 💪
+D) 20%+ consistently
 
-Any amount counts! Drop your letter 👇""",
+Drop your letter! 👇""",
 
-        """If you lost your job tomorrow — how long could you survive? 😬
+        """If you could build one thing outside your career right now?
+
+A) A passive income stream
+B) An investment portfolio
+C) My own business
+D) Real estate 🏠
+
+Tayo na — comment your letter 👇""",
+    ],
+
+    "health": [
+        """How many hours of quality sleep do you actually get on workdays? 😴
+
+A) Less than 5 hours
+B) 5–6 hours
+C) 7–8 hours
+D) Varies too much to say
+
+Drop your letter! 👇""",
+
+        """How do you manage stress from a demanding professional career? 💆
+
+A) Exercise regularly
+B) Mindfulness or meditation
+C) Honestly, not well
+D) Work IS my stress relief 😅
+
+Comment your letter 👇""",
+
+        """When did you last have a full health check-up? 🏥
+
+A) Within this year
+B) 1–2 years ago
+C) Only when something feels wrong
+D) It's been too long
+
+Drop your letter! 👇""",
+
+        """How often do you skip meals because of work? 🍽️
+
+A) Almost never — I prioritise this
+B) Sometimes, maybe 1–2x a week
+C) Several times a week
+D) Daily reality for me 😅
+
+Comment your letter 👇""",
+
+        """What's your biggest barrier to staying healthy with a demanding career?
+
+A) No time after long shifts
+B) Irregular working hours
+C) Too exhausted to exercise
+D) Stress eating 😅 💡
+
+Drop your letter! 👇""",
+
+        """Do you take daily health supplements? 💊
+
+A) Yes — consistently
+B) Sometimes, not consistent
+C) No — I rely on diet
+D) Thinking about starting
+
+Comment your letter 👇""",
+    ],
+
+    "money": [
+        """What percentage of your salary goes to savings and investments? 📊
+
+A) Nothing yet
+B) Less than 10%
+C) 10–20%
+D) 20%+ consistently
+
+Drop your letter! 👇""",
+
+        """Where does the biggest chunk of your salary actually go? 💸
+
+A) Living expenses
+B) Supporting family
+C) Savings and investments
+D) It disappears somehow 😅
+
+Comment your letter 👇""",
+
+        """Honest question for professionals — do you have a financial plan? 📈
+
+A) Yes — detailed and active
+B) Rough idea, not written
+C) Working on building one
+D) Not yet 💡
+
+Drop your letter! 👇""",
+
+        """If you lost your income tomorrow — how long could you sustain yourself?
 
 A) Less than 1 month
 B) 1–3 months
 C) 3–6 months
-D) 6+ months, I'm ready 💪
+D) 6+ months — I'm prepared 💪
 
-Real talk. Drop your letter 👇""",
+Comment your letter 👇""",
 
-        """Biggest money mistake? 💭
+        """What's your current relationship with investing? 📉📈
 
-A) Not saving earlier
-B) Lent money, never returned 😅
-C) Bought things I didn't need
-D) Didn't invest when I could
+A) Actively investing regularly
+B) Know I should, haven't started
+C) Learning before I begin
+D) Already building a portfolio 💰
 
-We've all been there! Drop your letter 👇""",
+Drop your letter! 👇""",
+
+        """What's the smartest financial move you've made in your career? 💡
+
+A) Started investing early
+B) Built a side income
+C) Eliminated debt aggressively
+D) Still looking for mine 😅
+
+Comment your letter 👇""",
     ],
 
     "sideincome": [
-        """Do you have income outside your main job? 💼
+        """Do you have any income outside your main career? 💼
 
-A) Yes!
-B) Building one now
-C) Want to but don't know how
-D) Just salary for now
+A) Yes — already earning
+B) Building one right now
+C) Exploring options
+D) Just my salary for now
 
-Drop your letter 👇""",
+Drop your letter! 👇""",
 
-        """What stops you from starting a side income? 🤔
+        """What's the biggest barrier stopping you from building a side income?
 
-A) No time
-B) Don't know what to start
-C) Scared to lose money
+A) No time after work
+B) Don't know where to start
+C) Worried about the risk
 D) Already have one! 🙌
 
 Comment your letter 👇""",
 
-        """Extra $500 right now — what do you do? 💡
+        """If you had an extra $500/month passive income — what changes? 💡
 
-A) Save it
-B) Invest in stocks
-C) Start a small business
-D) Expenses talaga 😅
+A) Finally invest consistently
+B) Reduce financial stress
+C) Accelerate a big goal
+D) Build it into more 📈
 
 Drop your letter! 👇""",
 
-        """What side income are you most interested in? 🌱
+        """Which side income model fits a busy professional best? 🎯
 
-A) Online selling
-B) Freelancing
-C) Network marketing
-D) Content creation
+A) Freelancing your skills
+B) Network marketing
+C) Content creation
+D) Investments and dividends
 
-No wrong answer! Comment your letter 👇""",
+No wrong answer — comment your letter 👇""",
 
-        """How many income streams do you have? 📈
+        """How many income streams do professionals realistically need? 📈
 
-A) Just 1 (salary)
-B) Salary + 1 side
-C) Multiple already 💪
-D) Working on #2 now
+A) 1 solid salary is enough
+B) 2 minimum — salary + 1 side
+C) 3+ for real security
+D) Already building multiple 💪
 
-Drop your number 👇""",
+Drop your number! 👇""",
 
-        """If you had a stable $500/month extra income? 🎯
+        """What would a stable second income of $1,000/month change for you? 🎯
 
-A) Finally save properly
-B) Send more home
-C) Invest it
-D) Pay off debt first
+A) Financial freedom faster
+B) More investment capital
+C) Career choices become freer
+D) Retire earlier 🌟
 
-Comment your letter! 👇""",
+Comment your letter 👇""",
     ],
 }
 
